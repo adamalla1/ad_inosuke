@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PraRoz Restaurant — Template</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-color:#071021;
+      --card:#0f1720bb;
+      --accent:#ff7a00;
+      --muted:#bfc6cc;
+      --glass: rgba(255,255,255,0.04);
+      --radius:16px;
+      font-family: 'Inter', system-ui, Avenir, Helvetica, Arial;
+    }
+    *{box-sizing:border-box}
+    body,html{height:100%;margin:0;background:var(--bg-color);color:#fff}
+
+    /* NAV */
+    header{position:fixed;left:0;right:0;top:0;z-index:50;padding:18px 36px;display:flex;align-items:center;justify-content:space-between}
+    .brand{font-weight:800;color:var(--accent);font-size:22px}
+    nav{display:flex;gap:18px;align-items:center}
+    nav a{color:rgba(255,255,255,0.8);text-decoration:none;font-weight:600;font-size:14px}
+    .search{display:flex;gap:8px;align-items:center}
+    .search input{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:10px;color:#fff}
+    .search button{background:var(--accent);border:none;padding:8px 12px;border-radius:10px;color:#fff;font-weight:700}
+
+    /* HERO */
+    .hero{height:88vh;display:grid;grid-template-columns:1fr 380px;align-items:center;padding:80px 6vw;background-image:url('https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=1650&q=80');background-size:cover;background-position:center;position:relative}
+    .overlay{position:absolute;inset:0;background:linear-gradient(90deg, rgba(7,16,33,0.7) 0%, rgba(7,16,33,0.35) 45%, rgba(7,16,33,0.75) 100%)}
+
+    .hero-left{position:relative;z-index:2;max-width:840px}
+    .kicker{color:var(--muted);letter-spacing:2px;font-weight:600;margin-bottom:16px}
+    h1{font-size:56px;margin:0 0 12px;line-height:1.02}
+    h1 .accent{color:var(--accent)}
+    p.lead{color:var(--muted);max-width:680px}
+    .cta{margin-top:26px}
+    .btn{background:var(--accent);color:#fff;padding:12px 18px;border-radius:12px;border:none;font-weight:700;cursor:pointer}
+    .btn.ghost{background:transparent;border:2px solid rgba(255,255,255,0.08)}
+
+    /* LOGIN CARD */
+    .card{position:relative;z-index:3;background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));padding:22px;border-radius:16px;backdrop-filter:blur(6px);box-shadow:0 8px 30px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.04)}
+    .card h3{text-align:center;margin:4px 0 18px}
+    .form-row{margin-bottom:12px}
+    .form-row input{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#fff}
+    .socials{display:flex;gap:12px;justify-content:center;margin-top:12px}
+    .socials a{width:36px;height:36px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;text-decoration:none;color:#fff;font-weight:700}
+
+    /* MAIN CONTENT BELOW HERO */
+    main{background:#fff;color:#0b1220;padding:48px 6vw;border-top-left-radius:36px;border-top-right-radius:36px;margin-top:-36px}
+    .section{max-width:1200px;margin:0 auto}
+    .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:18px}
+    .dish{background:#fff;border-radius:12px;padding:14px;border:1px solid #eee;box-shadow:0 8px 24px rgba(11,18,32,0.04);display:flex;flex-direction:column}
+    .dish img{width:100%;height:150px;object-fit:cover;border-radius:10px}
+    .dish h4{margin:10px 0 6px}
+    .meta{color:#666;font-size:14px}
+    .dish .order{margin-top:auto;display:flex;justify-content:space-between;align-items:center}
+
+    /* modal */
+    .modal{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:flex;align-items:center;justify-content:center;z-index:999;display:none}
+    .modal .box{background:#fff;padding:20px;border-radius:12px;color:#0b1220;min-width:320px}
+
+    /* responsive */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr; height:auto;padding:120px 6vw 40px;background-position:center}
+      .hero-left{padding-bottom:26px}
+      header{padding:12px 18px}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">AD_Inosuke<span style="color:#fff;opacity:0.08">.</span></div>
+    <nav>
+      <a href="#">HOME</a>
+      <a href="#menu">MENU</a>
+      <a href="about2.html">ABOUT</a>
+      <a href="contact2.html">CONTACT</a>
+      <div class="search">
+        <input id="search" placeholder="Hello guys" />
+        <button onclick="goSearch()">Search</button>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="overlay"></div>
+    <div class="hero-left">
+      <div class="kicker">Modern Restaurant</div>
+      <h1>Delicious <span class="accent">Meals</span><br>Crafted With Love</h1>
+      <p class="lead">Welcome to PraRoz Restaurant — fresh seasonal dishes, quick delivery and a cozy dining experience. Browse the menu, login to order and track your food.</p>
+      <div class="cta">
+        <button class="btn" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">Order Now</button>
+        <button class="btn ghost" style="margin-left:12px">View Full Menu</button>
+      </div>
+    </div>
+
+    <aside class="card">
+      <h3>Login Here</h3>
+      <div class="form-row">
+        <input id="email" type="text" placeholder="email or username" />
+      </div>
+      <div class="form-row">
+        <input id="pwd" type="password" placeholder="password" />
+      </div>
+      <div style="text-align:center;margin-top:8px">
+        <button class="btn" style="width:100%" id="loginBtn">Login</button>
+      </div>
+      <p style="text-align:center;margin-top:12px;color:var(--muted)">Don't have account? <a href="#" id="signupLink" style="color:var(--accent);text-decoration:none">Sign up here</a></p>
+      <div class="socials">
+        <a href="#">f</a><a href="#">ig</a><a href="#">t</a><a href="#">G</a>
+      </div>
+    </aside>
+  </section>
+
+  <main>
+    <div class="section">
+      <h2 id="menu">Our Popular Dishes</h2>
+      <p style="color:#555">Tap Order to add to cart. This template uses client-side JS for demo — replace with real backend for production.</p>
+      <div class="menu-grid" id="menuGrid"></div>
+    </div>
+  </main>
+
+  <div class="modal" id="modal">
+    <div class="box">
+      <h3 id="modalTitle">Item added</h3>
+      <p id="modalText"></p>
+      <div style="text-align:right;margin-top:12px">
+        <button onclick="closeModal()" class="btn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // sample dishes; replace images and data with your restaurant's menu
+    const dishes = [
+      {id:1,name:'Grilled Salmon',desc:'Salmon with lemon butter and salad',price:12.99,img:'https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=800&q=60'},
+      {id:2,name:'Margherita Pizza',desc:'Wood-fired pizza with fresh basil',price:9.50,img:'https://images.unsplash.com/photo-1601924638867-3ec2f6f1b7b5?auto=format&fit=crop&w=800&q=60'},
+      {id:3,name:'Beef Burger',desc:'Juicy beef burger with fries',price:8.90,img:'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=60'},
+      {id:4,name:'Vegan Bowl',desc:'Quinoa, chickpeas, avocado',price:7.25,img:'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=60'}
+    ];
+
+    const grid = document.getElementById('menuGrid');
+    function render(){
+      grid.innerHTML='';
+      dishes.forEach(d=>{
+        const el = document.createElement('div'); el.className='dish';
+        el.innerHTML = `\
+          <img src="${d.img}" alt="${d.name}" />\
+          <h4>${d.name}</h4>\
+          <div class="meta">${d.desc}</div>\
+          <div class="order">\
+            <div style="font-weight:700">$${d.price.toFixed(2)}</div>\
+            <button class="btn" onclick="addToCart(${d.id})">Order</button>\
+          </div>`;
+        grid.appendChild(el);
+      })
+    }
+    render();
+
+    function addToCart(id){
+      const dish = dishes.find(x=>x.id===id);
+      document.getElementById('modalTitle').innerText = dish.name + ' added to cart';
+      document.getElementById('modalText').innerText = 'Price: $' + dish.price.toFixed(2);
+      document.getElementById('modal').style.display='flex';
+    }
+    function closeModal(){document.getElementById('modal').style.display='none'}
+
+    // simple client-side "login" (demo only)
+    const loginBtn = document.getElementById('loginBtn');
+    loginBtn.addEventListener('click',()=>{
+      const email = document.getElementById('email').value.trim();
+      const pwd = document.getElementById('pwd').value.trim();
+      if(!email || !pwd){alert('Enter email and password');return}
+      // demo: accept any credentials and store in localStorage
+      localStorage.setItem('pra_user', JSON.stringify({email}));
+      loginBtn.innerText='Logged'; loginBtn.disabled=true; loginBtn.style.opacity=0.8;
+      alert('Logged in as '+email+' (demo)');
+    });
+
+    // if user already logged
+    window.addEventListener('load',()=>{
+      const u = localStorage.getItem('pra_user');
+      if(u){loginBtn.innerText='Logged';loginBtn.disabled=true;loginBtn.style.opacity=0.8}
+    })
+
+    // small helper: replace with real backend (Firebase/Auth or your server)
+  </script>
+  <script>
+function goSearch(){
+  const query = document.getElementById('search').value.trim();
+  if(query){
+    window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+  } else {
+    alert("Type something to search!");
+  }
+}
+</script>
+
+</body>
+</html>

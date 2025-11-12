@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search - PraRoz Restaurant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body{margin:0;font-family:'Inter',sans-serif;background:#071021;color:#fff}
+    header{position:fixed;left:0;right:0;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:18px 36px;background:rgba(7,16,33,0.8);backdrop-filter:blur(8px)}
+    .brand{font-weight:800;color:#ff7a00;font-size:22px}
+    nav a{color:#fff;text-decoration:none;margin:0 12px;font-weight:600;opacity:0.8}
+    nav a:hover{color:#ff7a00}
+    .search-box{display:flex;align-items:center;gap:8px;}
+    .search-box input{padding:8px 12px;border-radius:8px;border:none;background:rgba(255,255,255,0.08);color:#fff}
+    .search-box button{background:#ff7a00;border:none;padding:8px 14px;border-radius:8px;color:#fff;font-weight:700;cursor:pointer}
+
+    .hero{height:40vh;background:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;display:flex;align-items:center;justify-content:center;position:relative}
+    .overlay{position:absolute;inset:0;background:rgba(7,16,33,0.6)}
+    .hero h1{z-index:2;font-size:46px}
+
+    main{max-width:1100px;margin:60px auto;padding:20px}
+    .results{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:20px}
+    .dish{background:rgba(255,255,255,0.05);border-radius:12px;overflow:hidden;backdrop-filter:blur(6px);padding-bottom:12px}
+    .dish img{width:100%;height:160px;object-fit:cover}
+    .dish h3{margin:10px;font-size:18px}
+    .dish p{margin:0 10px 10px;color:#ccc;font-size:14px}
+    footer{background:#000;padding:20px;text-align:center;color:#888;margin-top:40px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">PraRoz</div>
+    <nav>
+      <a href="index2.html">Home</a>
+      <a href="about2.html">About</a>
+      <a href="contact2.html">Contact</a>
+    </nav>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search..." />
+      <button onclick="doSearch()">Search</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="overlay"></div>
+    <h1>Search Results</h1>
+  </section>
+
+  <main>
+    <div id="results" class="results"></div>
+  </main>
+
+  <footer>
+    © 2025 PraRoz Restaurant — All Rights Reserved
+  </footer>
+
+  <script>
+    // نفس data ديال menu ف الصفحة الرئيسية
+    const dishes = [
+      {name:'Grilled Salmon',desc:'Salmon with lemon butter and salad',img:'https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=800&q=60'},
+      {name:'Margherita Pizza',desc:'Wood-fired pizza with fresh basil',img:'https://images.unsplash.com/photo-1601924638867-3ec2f6f1b7b5?auto=format&fit=crop&w=800&q=60'},
+      {name:'Beef Burger',desc:'Juicy beef burger with fries',img:'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=60'},
+      {name:'Vegan Bowl',desc:'Quinoa, chickpeas, avocado',img:'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=60'}
+    ];
+
+    const results = document.getElementById('results');
+
+    function render(list){
+      results.innerHTML = '';
+      if(list.length === 0){
+        results.innerHTML = '<p style=\"text-align:center;color:#ccc\">No results found.</p>';
+        return;
+      }
+      list.forEach(d=>{
+        const card = document.createElement('div');
+        card.className='dish';
+        card.innerHTML = `
+          <img src=\"${d.img}\">
+          <h3>${d.name}</h3>
+          <p>${d.desc}</p>
+        `;
+        results.appendChild(card);
+      })
+    }
+
+    // function to filter results
+    function doSearch(){
+      const q = document.getElementById('searchInput').value.toLowerCase();
+      const filtered = dishes.filter(d => d.name.toLowerCase().includes(q));
+      render(filtered);
+    }
+
+    // عند التحميل: خذ القيمة من الرابط (query)
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get('q');
+    if(q){
+      document.getElementById('searchInput').value = q;
+      const filtered = dishes.filter(d => d.name.toLowerCase().includes(q.toLowerCase()));
+      render(filtered);
+    }
+  </script>
+</body>
+</html>
